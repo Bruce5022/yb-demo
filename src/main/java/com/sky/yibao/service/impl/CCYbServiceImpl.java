@@ -14,6 +14,9 @@ public class CCYbServiceImpl extends YbServiceDefaultImpl implements CCYbService
     public JSONObject read(JSONObject reqJson) {
         String insuranceOrgId = reqJson.getString("insuranceOrgId");
         YbCompanyEnum companyEnum = YbCompanyEnum.getByInsuranceOrgId(insuranceOrgId);
+        /**
+         * 1.封装长春医保参数，调用长春医保接口
+         */
         JSONObject resp = LocalMedicareProxy.BUSINESSHANDLENEW(reqJson);
         return RespApi.succuss(companyEnum.getDescription() + "【查询】成功", resp);
     }
