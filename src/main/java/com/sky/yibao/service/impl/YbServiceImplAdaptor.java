@@ -14,12 +14,11 @@ import java.util.Set;
 
 
 /**
- * @shizhanwei
- * 适配层：
- *  1.转发请求
- *  2.检查公共参数
- *  3.统一封装入参
- *  4.统一封装出参
+ * @shizhanwei 通用接口适配层：
+ * 1.转发请求
+ * 2.检查公共参数
+ * 3.统一封装入参
+ * 4.统一封装出参
  */
 public final class YbServiceImplAdaptor implements YbBaseService {
     private static Map<String, YbBaseService> ybServiceMap = new HashMap<>();
@@ -30,11 +29,10 @@ public final class YbServiceImplAdaptor implements YbBaseService {
         Set<String> serviceNames = beansMap.keySet();
         for (String serviceName : serviceNames) {
             YbCompanyEnum companyEnum = YbCompanyEnum.getByServiceName(serviceName);
-            if (companyEnum != null) {
-                // 为集合赋值
-                YbBaseService ybRealService = SpringContextHolder.getBean(serviceName);
-                ybServiceMap.put(companyEnum.getInsuranceOrgId(), ybRealService);
-            }
+            if (companyEnum == null) continue;
+            // 为集合赋值
+            YbBaseService ybRealService = SpringContextHolder.getBean(serviceName);
+            ybServiceMap.put(companyEnum.getInsuranceOrgId(), ybRealService);
         }
     }
 
