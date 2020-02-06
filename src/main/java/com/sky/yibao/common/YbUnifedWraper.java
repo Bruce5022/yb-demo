@@ -4,7 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * @author shizhanwei
- * 医保统一入参出参接口，留着给不同医保实现吧
+ * 不同医保字段有统一标准
+ *  入参，出参在如下方法子类中统一映射
  */
 public abstract class YbUnifedWraper {
 
